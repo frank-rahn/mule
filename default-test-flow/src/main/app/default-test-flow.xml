@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.4.1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <custom-transformer class="de.rahn.mule.transformer.DumpTransformer" name="Dumper" doc:name="Java" doc:description="Ein Transformer, der die wichtigsten Daten aus der Message ausgibt."/>
+    <flow name="DefaultTestFlow" doc:name="DefaultTestFlow" doc:description="Der Default Flow dieser Mule-Anwendung." tracking:enable-default-events="true">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8080" path="default" doc:name="Inbound HTTP Endpoint"/>
+        <cxf:jaxws-service doc:name="Inbound SOAP Service"/>
+        <transformer ref="Dumper" doc:name="Inbound Dumper"/>
+        <cxf:jaxws-client doc:name="Outbound SOAP Service"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" method="POST" doc:name="Outbound HTTP Endpoint"/>
+        <transformer ref="Dumper" doc:name="Outbound Dumper"/>
+    </flow>
+</mule>
