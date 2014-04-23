@@ -21,7 +21,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 <!--	Liefert wenn nicht gesetzt folgenden Fehler:
 		java.lang.ClassCastException: java.lang.reflect.Method cannot be cast to java.lang.String
 -->
-		<set-variable variableName="operation" value="echo" doc:name="Variable" />
+		<set-variable variableName="operation" value="echo" doc:name="Set-Variable" />
     	<custom-transformer class="de.rahn.mule.transformer.DumpTransformer" name="Inbound-After-DefaultTestFlow" doc:name="Inbound Dumper" />
 <!-- 	Kann durch eine Processer-Chain ersetzt werden 
         <http:outbound-endpoint host="localhost" port="8081" path="echo" method="POST" exchange-pattern="request-response" doc:name="Outbound HTTP Endpoint">
