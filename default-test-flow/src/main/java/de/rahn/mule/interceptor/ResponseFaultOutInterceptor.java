@@ -33,7 +33,7 @@ public class ResponseFaultOutInterceptor extends AbstractSoapInterceptor {
 		Fault exceptionFault = (Fault) message.getContent(Exception.class);
 
 		if (exceptionFault == null) {
-			// Nichts zu tun dieser Interceptor wurde falsch eingesetzt
+			LOGGER.info("Nothing to do.");
 			return;
 		}
 
