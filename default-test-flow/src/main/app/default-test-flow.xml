@@ -29,7 +29,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
         </http:outbound-endpoint>
 -->
         <processor-chain name="OutboundWSClient" doc:name="Outbound WS Client">
-			<cxf:jaxws-client serviceClass="de.frank_rahn.xmlns.ws.echo._1_1.EchoService" operation="echo" doc:name="SOAP Service"/>
+			<cxf:jaxws-client serviceClass="de.frank_rahn.xmlns.ws.echo._1_1.EchoService" operation="echo" doc:name="SOAP Service" />
 			<http:outbound-endpoint host="localhost" port="8081" path="echo" doc:name="HTTP Endpoint" />
 		</processor-chain>
     	<custom-transformer class="de.rahn.mule.transformer.DumpTransformer" name="Outbound-Before-DefaultTestFlow" doc:name="Outbound Dumper" />

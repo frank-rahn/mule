@@ -2,12 +2,18 @@ package de.rahn.mule.interceptor;
 
 import static org.apache.cxf.phase.Phase.MARSHAL;
 
+import javax.xml.bind.JAXB;
+import javax.xml.transform.dom.DOMResult;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.cxf.binding.soap.SoapMessage;
 import org.apache.cxf.binding.soap.interceptor.AbstractSoapInterceptor;
 import org.apache.cxf.interceptor.Fault;
 import org.apache.cxf.interceptor.Interceptor;
+import org.w3c.dom.Document;
+
+import de.frank_rahn.xmlns.ws.echo._1_1.EchoFault;
 
 /**
  * Ein {@link Interceptor} zur Konvertierung der Fehlermeldung im {@link Fault}.
@@ -15,8 +21,9 @@ import org.apache.cxf.interceptor.Interceptor;
  * @author Frank Rahn
  */
 public class ResponseFaultOutInterceptor extends AbstractSoapInterceptor {
-	
-	private static final Log LOGGER = LogFactory.getLog(ResponseFaultOutInterceptor.class);
+
+	private static final Log LOGGER = LogFactory
+			.getLog(ResponseFaultOutInterceptor.class);
 
 	/**
 	 * Konstruktor.
@@ -36,10 +43,25 @@ public class ResponseFaultOutInterceptor extends AbstractSoapInterceptor {
 			LOGGER.info("Nothing to do.");
 			return;
 		}
-
 		Throwable originalCause = getOriginalCause(exceptionFault);
-		
-		LOGGER.info(originalCause);
+
+		LOGGER.info("\nFault: " + exceptionFault + "\nOriginalCause: "
+				+ originalCause);
+
+		if (originalCause instanceof EchoFault) {
+			EchoFault echoFault = (EchoFault) originalCause;
+
+			Fault fault = new Fault(
+					new de.frank_rahn.xmlns.ws.echo._2_0.EchoFault(
+							echoFault.getMessage(), echoFault.getFaultInfo()));
+			DOMResult result = new DOMResult();
+			JAXB.marshal(echoFault.getFaultInfo(), result);
+			fault.setDetail(((Document) result.getNode()).getDocumentElement());
+
+			message.setContent(Exception.class, fault);
+
+			LOGGER.info("Neu Fault set");
+		}
 	}
 
 	/**
@@ -55,5 +77,5 @@ public class ResponseFaultOutInterceptor extends AbstractSoapInterceptor {
 
 		return getOriginalCause(cause);
 	}
-	
+
 }

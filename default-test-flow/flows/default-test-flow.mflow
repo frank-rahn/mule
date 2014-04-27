@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="default-test-flow">
-    <flow SubFlow="false" name="DefaultTestFlow" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="763e76cc-3a6c-479f-b849-94a72e971605">
+    <flow SubFlow="false" name="DefaultTestFlow" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="8e4889e9-5cd1-4d36-b803-99a7daac4b4a">
         <properties>
             <property name="initialState"/>
             <property name="processingStrategy2"/>
@@ -59,7 +59,6 @@
                     <property name="enableMuleSoapHeaders"/>
                     <property name="auxiliary;index" value="3"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/outFaultInterceptors;0">
-                        <property name="isProcessed$$$$ " value="true"/>
                         <property name="auxiliary;index" value="4"/>
                         <property name="auxiliary;wrapIn" value="4"/>
                     </property-collection>
@@ -205,7 +204,7 @@
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="EchoTestFlow" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="f127c1fc-e2b8-40a0-af0f-890472b1ef7f">
+    <flow SubFlow="false" name="EchoTestFlow" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="96e9592b-eede-435c-a30f-ad2582fcb759">
         <properties>
             <property name="initialState"/>
             <property name="processingStrategy2"/>
@@ -284,7 +283,6 @@
                     <property name="auxiliary;index" value="20"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property name="class" value="de.rahn.mule.component.EchoServiceV11Component"/>
-                        <property name="isProcessed$$$$ " value="true"/>
                         <property name="auxiliary;index" value="21"/>
                         <property name="auxiliary;wrapIn" value="21"/>
                     </property-collection>
