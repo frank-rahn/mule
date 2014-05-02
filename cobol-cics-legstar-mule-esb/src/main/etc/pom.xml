@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd
+	">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>de.frank_rahn.xmlns.ws</groupId>
+	<artifactId>bic</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>Bic Services</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.cxf.xjc-utils</groupId>
+			<artifactId>cxf-xjc-runtime</artifactId>
+			<version>2.7.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.xml.bind</groupId>
+             		<artifactId>jaxb-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>2.7.10</version>
+				<executions>
+					<execution>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+						<configuration>
+							<encoding>UTF-8</encoding>
+							<additionalJvmArgs>-Dfile.encoding=UTF8</additionalJvmArgs>
+							<defaultOptions>
+								<extraargs>
+									<extrarg>-xjc-enableIntrospection</extrarg>
+									<extraarg>-xjc-Xsetters</extraarg>
+									<extraarg>-xjc-Xts:style:org.apache.cxf.xjc.runtime.JAXBToStringStyle.MULTI_LINE_STYLE</extraarg>
+									<extraarg>-xjc-Xfluent-api</extraarg>
+								</extraargs>
+								<bindingFiles>
+									<bindingFile>http://xmlns.frank-rahn.de/binding/jaxb/1.0</bindingFile>
+									<bindingFile>http://xmlns.frank-rahn.de/binding/jaxws/1.0</bindingFile>
+								</bindingFiles>
+							</defaultOptions>
+							<wsdlOptions>
+								<wsdlOption>
+									<wsdl>http://xmlns.frank-rahn.de/ws/bic/1.0</wsdl>
+								</wsdlOption>
+							</wsdlOptions>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.cxf.xjcplugins</groupId>
+						<artifactId>cxf-xjc-ts</artifactId>
+						<version>2.7.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.jvnet.jaxb2_commons</groupId>
+						<artifactId>jaxb2-fluent-api</artifactId>
+						<version>3.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.jvnet.jaxb2_commons</groupId>
+						<artifactId>jaxb2-basics</artifactId>
+						<version>0.6.5</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
