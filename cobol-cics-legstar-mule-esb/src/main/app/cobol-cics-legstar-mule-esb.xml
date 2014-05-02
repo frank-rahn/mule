@@ -1,17 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <mule xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.4.1"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:legstar="http://www.mulesoft.org/schema/mule/legstar" version="EE-3.4.1"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
-http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd">
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+http://www.mulesoft.org/schema/mule/legstar http://www.legsem.com/legstar/xml/mule-legstar-3.4.xsd">
+
+    <!-- Transform serialized java objects to mainframe data -->
+    <legstar:java-to-host-transformer name="pbk010JavaToHost" hostCharset="IBM01141"
+        class="de.rahn.legstar.cixs.bk010.DfhcommareaToHostMuleTransformer" />
+        
+    <!-- Transform mainframe data to serialized java objects -->
+    <legstar:host-to-java-transformer name="pbk010HostToJava" hostCharset="IBM01141"
+        class="de.rahn.legstar.cixs.bk010.HostToDfhcommareaMuleTransformer" />
+
+    <!-- Wrap mainframe data in a LegStar request for mainframe program execution -->
+    <legstar:host-to-legstar-transformer name="pbk010HostToLegStar" hostCharset="IBM01141">
+        <legstar:host-program programName="PBK010" maxDataLength="1338" dataLength="76" />
+    </legstar:host-to-legstar-transformer>
+    
+    <!-- Unwrap LegStar response to mainframe program execution -->
+    <legstar:legstar-to-host-transformer name="pbk010LegStarToHost" />
+
+	<!-- Legstar Outbound Endpoint -->
+    <legstar:endpoint name="mainframeRequestEndpoint" exchange-pattern="request-response"
+        address="legstar://TD00123:geheim@mainframe.frank-rahn.de:4081/CICS/BK01/LSWEBBIN" />
 
     <flow name="cobol-cics-legstar-mule-esbFlow" tracking:enable-default-events="true" doc:name="cobol-cics-legstar-mule-esbFlow" doc:description="Bereitstellen eines Integrationsservices f&#252;r das Mainframe CICS Programms PBK010.">
-        <http:inbound-endpoint host="localhost" port="8080" path="pbk0101" exchange-pattern="request-response" doc:name="Inbound HTTP Endpoint"/>
-        <cxf:jaxws-service serviceClass="de.frank_rahn.xmlns.ws.bic._1_0.BicService" doc:name="Inbound SOAP Service"/>
+        <http:inbound-endpoint host="localhost" port="8080" path="pbk0101" exchange-pattern="request-response" doc:name="Inbound HTTP Endpoint" />
+        <cxf:jaxws-service serviceClass="de.frank_rahn.xmlns.ws.bic._1_0.BicService" doc:name="Inbound SOAP Service" />
+        
+        <outbound-endpoint ref="mainframeRequestEndpoint" exchange-pattern="request-response" doc:name="Outbound LegStar Endpoint"
+            transformer-refs="pbk010JavaToHost pbk010HostToLegStar"
+            responseTransformer-refs="pbk010LegStarToHost pbk010HostToJava" />
     </flow>
     
 </mule>
