@@ -6,5 +6,7 @@
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/resources"/>
+	<classpathentry kind="con" path="com.legstar.eclipse.LIBRARY"/>
+	<classpathentry kind="con" path="com.legstar.eclipse.mule.LIBRARY"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
