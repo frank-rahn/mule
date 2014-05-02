@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="default-test-flow">
-    <flow SubFlow="false" name="DefaultTestFlow" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="8e4889e9-5cd1-4d36-b803-99a7daac4b4a">
+    <flow SubFlow="false" name="DefaultTestFlow" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="29a2772c-0b9a-4e6b-872e-bc99e978bf43">
         <properties>
             <property name="initialState"/>
             <property name="processingStrategy2"/>
@@ -11,106 +11,98 @@
         </properties>
         <description>Der Default Flow dieser Mule-Anwendung.</description>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
-            <graphicalData x="0" y="0" width="0" height="0"/>
             <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="Inbound HTTP Endpoint" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
-                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="port" value="8080"/>
-                    <property name="host" value="localhost"/>
-                    <property name="businessEventsLabel"/>
-                    <property name="followRedirects"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
-                    <property name="keep-alive"/>
-                    <property name="contentType"/>
-                    <property name="disableTransportTransformer"/>
-                    <property name="password"/>
                     <property name="exchange-pattern" value="request-response"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="httpLabel"/>
+                    <property name="host" value="localhost"/>
+                    <property name="port" value="8080"/>
+                    <property name="path" value="default"/>
+                    <property name="method"/>
+                    <property name="businessEventsLabel"/>
                     <property name="tracking:enable-default-events"/>
+                    <property name="address"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="responseTimeout"/>
+                    <property name="followRedirects"/>
+                    <property name="connector-ref"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
-                    <property name="httpLabel"/>
-                    <property name="address"/>
-                    <property name="path" value="default"/>
-                    <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
-                    <property name="method"/>
                     <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
                     <property name="auxiliary;index" value="2"/>
-                    <property name="responseTimeout"/>
-                    <property name="mimeType"/>
-                    <property name="connector-ref"/>
                 </properties>
             </endpoint>
             <pattern name="Inbound SOAP Service" type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" entity-id="SOAP#1">
-                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="port"/>
-                    <property name="wsdlLocation"/>
-                    <property name="serviceClass" value="de.frank_rahn.xmlns.ws.echo._2_0.EchoService"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/cxf/jaxws-service"/>
                     <property name="configuration-ref"/>
-                    <property name="namespace"/>
-                    <property name="validationEnabled"/>
                     <property name="bindingId"/>
-                    <property name="onException"/>
+                    <property name="port"/>
+                    <property name="namespace"/>
                     <property name="service"/>
+                    <property name="onException"/>
+                    <property name="serviceClass" value="de.frank_rahn.xmlns.ws.echo._2_0.EchoService"/>
+                    <property name="validationEnabled"/>
+                    <property name="wsdlLocation"/>
                     <property name="mtomEnabled"/>
-                    <property name="soapVersion"/>
                     <property name="enableMuleSoapHeaders"/>
+                    <property name="soapVersion"/>
                     <property name="auxiliary;index" value="3"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/outFaultInterceptors;0">
-                        <property name="auxiliary;index" value="4"/>
                         <property name="auxiliary;wrapIn" value="4"/>
+                        <property name="auxiliary;index" value="4"/>
                     </property-collection>
                 </properties>
             </pattern>
             <pattern name="Inbound Dumper" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#1">
-                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
-                    <property name="name" value="Inbound-Before-DefaultTestFlow"/>
                     <property name="encoding"/>
-                    <property name="class" value="de.rahn.mule.transformer.DumpTransformer"/>
-                    <property name="auxiliary;index" value="6"/>
                     <property name="mimeType"/>
+                    <property name="class" value="de.rahn.mule.transformer.DumpTransformer"/>
+                    <property name="name" value="Inbound-Before-DefaultTestFlow"/>
+                    <property name="auxiliary;index" value="6"/>
                 </properties>
             </pattern>
             <pattern name="Request-Transformer" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#2">
-                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
-                    <property name="name" value="Request-Transformer"/>
                     <property name="encoding"/>
-                    <property name="class" value="de.rahn.mule.transformer.RequestTransformer"/>
-                    <property name="auxiliary;index" value="7"/>
                     <property name="mimeType"/>
+                    <property name="class" value="de.rahn.mule.transformer.RequestTransformer"/>
+                    <property name="name" value="Request-Transformer"/>
+                    <property name="auxiliary;index" value="7"/>
                 </properties>
             </pattern>
             <pattern name="Set-Variable" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#1">
-                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
                     <property name="variableName" value="operation"/>
                     <property name="value" value="echo"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
                     <property name="auxiliary;index" value="8"/>
                 </properties>
             </pattern>
             <pattern name="Inbound Dumper" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#3">
-                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
-                    <property name="name" value="Inbound-After-DefaultTestFlow"/>
                     <property name="encoding"/>
-                    <property name="class" value="de.rahn.mule.transformer.DumpTransformer"/>
-                    <property name="auxiliary;index" value="9"/>
                     <property name="mimeType"/>
+                    <property name="class" value="de.rahn.mule.transformer.DumpTransformer"/>
+                    <property name="name" value="Inbound-After-DefaultTestFlow"/>
+                    <property name="auxiliary;index" value="9"/>
                 </properties>
             </pattern>
             <scope name="Outbound WS Client" type="http://www.mulesoft.org/schema/mule/core/processor-chain" entity-id="Processor Chain#1">
-                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="name" value="OutboundWSClient"/>
                     <property name="auxiliary;index" value="10"/>
@@ -118,93 +110,88 @@
                 <compartment entity-id="compartment#1">
                     <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
                         <pattern name="SOAP Service" type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" entity-id="SOAP#2">
-                            <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
-<property name="wsdlLocation"/>
-<property name="port"/>
-<property name="serviceClass" value="de.frank_rahn.xmlns.ws.echo._1_1.EchoService"/>
-<property name="operation" value="echo"/>
 <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/cxf/jaxws-client"/>
-<property name="mtomEnabled"/>
-<property name="soapVersion"/>
-<property name="enableMuleSoapHeaders"/>
-<property name="configuration-ref"/>
-<property name="clientClass"/>
-<property name="auxiliary;index" value="11"/>
+<property name="operation" value="echo"/>
+<property name="serviceClass" value="de.frank_rahn.xmlns.ws.echo._1_1.EchoService"/>
 <property name="decoupledEndpoint"/>
+<property name="clientClass"/>
+<property name="port"/>
+<property name="wsdlLocation"/>
+<property name="mtomEnabled"/>
+<property name="configuration-ref"/>
+<property name="enableMuleSoapHeaders"/>
+<property name="soapVersion"/>
+<property name="auxiliary;index" value="11"/>
                             </properties>
                         </pattern>
                         <endpoint direction="Outbound" message-exchange-pattern="RequestResponse" name="HTTP Endpoint" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#2">
-                            <graphicalData x="0" y="0" width="0" height="0"/>
                             <properties>
-<property name="port" value="8081"/>
-<property name="host" value="localhost"/>
-<property name="businessEventsLabel"/>
-<property name="followRedirects"/>
-<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
-<property name="keep-alive"/>
-<property name="contentType"/>
-<property name="disableTransportTransformer"/>
-<property name="password"/>
 <property name="exchange-pattern"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+<property name="httpLabel"/>
+<property name="host" value="localhost"/>
+<property name="port" value="8081"/>
+<property name="path" value="echo"/>
+<property name="method"/>
+<property name="businessEventsLabel"/>
 <property name="tracking:enable-default-events"/>
+<property name="address"/>
+<property name="encoding"/>
+<property name="disableTransportTransformer"/>
+<property name="mimeType"/>
+<property name="responseTimeout"/>
+<property name="followRedirects"/>
+<property name="connector-ref"/>
 <property name="ref"/>
 <property name="transformer-refs"/>
-<property name="httpLabel"/>
-<property name="address"/>
-<property name="path" value="echo"/>
-<property name="encoding"/>
 <property name="responseTransformer-refs"/>
-<property name="method"/>
 <property name="user"/>
+<property name="password"/>
+<property name="contentType"/>
+<property name="keep-alive"/>
 <property name="auxiliary;index" value="12"/>
-<property name="responseTimeout"/>
-<property name="mimeType"/>
-<property name="connector-ref"/>
                             </properties>
                         </endpoint>
                     </lane>
                 </compartment>
             </scope>
             <pattern name="Outbound Dumper" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#4">
-                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
-                    <property name="name" value="Outbound-Before-DefaultTestFlow"/>
                     <property name="encoding"/>
-                    <property name="class" value="de.rahn.mule.transformer.DumpTransformer"/>
-                    <property name="auxiliary;index" value="13"/>
                     <property name="mimeType"/>
+                    <property name="class" value="de.rahn.mule.transformer.DumpTransformer"/>
+                    <property name="name" value="Outbound-Before-DefaultTestFlow"/>
+                    <property name="auxiliary;index" value="13"/>
                 </properties>
             </pattern>
             <pattern name="Response-Transformer" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#5">
-                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
-                    <property name="name" value="Response-Transformer"/>
                     <property name="encoding"/>
-                    <property name="class" value="de.rahn.mule.transformer.ResponseTransformer"/>
-                    <property name="auxiliary;index" value="14"/>
                     <property name="mimeType"/>
+                    <property name="class" value="de.rahn.mule.transformer.ResponseTransformer"/>
+                    <property name="name" value="Response-Transformer"/>
+                    <property name="auxiliary;index" value="14"/>
                 </properties>
             </pattern>
             <pattern name="Outbound Dumper" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#6">
-                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
-                    <property name="name" value="Outbound-After-DefaultTestFlow"/>
                     <property name="encoding"/>
-                    <property name="class" value="de.rahn.mule.transformer.DumpTransformer"/>
-                    <property name="auxiliary;index" value="15"/>
                     <property name="mimeType"/>
+                    <property name="class" value="de.rahn.mule.transformer.DumpTransformer"/>
+                    <property name="name" value="Outbound-After-DefaultTestFlow"/>
+                    <property name="auxiliary;index" value="15"/>
                 </properties>
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="EchoTestFlow" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="96e9592b-eede-435c-a30f-ad2582fcb759">
+    <flow SubFlow="false" name="EchoTestFlow" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="3855e849-7c37-4fa0-8c11-87cb9514def3">
         <properties>
             <property name="initialState"/>
             <property name="processingStrategy2"/>
@@ -215,89 +202,83 @@
         </properties>
         <description>Der Flow für den EchoService.</description>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#3">
-            <graphicalData x="0" y="0" width="0" height="0"/>
             <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="Inbound HTTP Endpoint" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#3">
-                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="port" value="8081"/>
-                    <property name="host" value="localhost"/>
-                    <property name="businessEventsLabel"/>
-                    <property name="followRedirects"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
-                    <property name="keep-alive"/>
-                    <property name="contentType"/>
-                    <property name="disableTransportTransformer"/>
-                    <property name="password"/>
                     <property name="exchange-pattern" value="request-response"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="httpLabel"/>
+                    <property name="host" value="localhost"/>
+                    <property name="port" value="8081"/>
+                    <property name="path" value="echo"/>
+                    <property name="method"/>
+                    <property name="businessEventsLabel"/>
                     <property name="tracking:enable-default-events"/>
+                    <property name="address"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="responseTimeout"/>
+                    <property name="followRedirects"/>
+                    <property name="connector-ref"/>
                     <property name="ref"/>
                     <property name="transformer-refs"/>
-                    <property name="httpLabel"/>
-                    <property name="address"/>
-                    <property name="path" value="echo"/>
-                    <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
-                    <property name="method"/>
                     <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
                     <property name="auxiliary;index" value="17"/>
-                    <property name="responseTimeout"/>
-                    <property name="mimeType"/>
-                    <property name="connector-ref"/>
                 </properties>
             </endpoint>
             <pattern name="Inbound SOAP Service" type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" entity-id="SOAP#3">
-                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="port"/>
-                    <property name="wsdlLocation"/>
-                    <property name="serviceClass" value="de.frank_rahn.xmlns.ws.echo._1_1.EchoService"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/cxf/jaxws-service"/>
                     <property name="configuration-ref"/>
-                    <property name="namespace"/>
-                    <property name="validationEnabled"/>
                     <property name="bindingId"/>
-                    <property name="onException"/>
+                    <property name="port"/>
+                    <property name="namespace"/>
                     <property name="service"/>
+                    <property name="onException"/>
+                    <property name="serviceClass" value="de.frank_rahn.xmlns.ws.echo._1_1.EchoService"/>
+                    <property name="validationEnabled"/>
+                    <property name="wsdlLocation"/>
                     <property name="mtomEnabled"/>
-                    <property name="soapVersion"/>
                     <property name="enableMuleSoapHeaders"/>
+                    <property name="soapVersion"/>
                     <property name="auxiliary;index" value="18"/>
                 </properties>
             </pattern>
             <pattern name="Inbound Dumper" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#7">
-                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
-                    <property name="name" value="Inbound-EchoTestFlow"/>
                     <property name="encoding"/>
-                    <property name="class" value="de.rahn.mule.transformer.DumpTransformer"/>
-                    <property name="auxiliary;index" value="19"/>
                     <property name="mimeType"/>
+                    <property name="class" value="de.rahn.mule.transformer.DumpTransformer"/>
+                    <property name="name" value="Inbound-EchoTestFlow"/>
+                    <property name="auxiliary;index" value="19"/>
                 </properties>
             </pattern>
             <pattern name="Java Echo Service" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#8">
-                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="class"/>
                     <property name="auxiliary;index" value="20"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/singleton-object;0">
                         <property name="class" value="de.rahn.mule.component.EchoServiceV11Component"/>
-                        <property name="auxiliary;index" value="21"/>
                         <property name="auxiliary;wrapIn" value="21"/>
+                        <property name="auxiliary;index" value="21"/>
                     </property-collection>
                 </properties>
             </pattern>
             <pattern name="Outbound Dumper" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#9">
-                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
-                    <property name="name" value="Outbound-EchoTestFlow"/>
                     <property name="encoding"/>
-                    <property name="class" value="de.rahn.mule.transformer.DumpTransformer"/>
-                    <property name="auxiliary;index" value="22"/>
                     <property name="mimeType"/>
+                    <property name="class" value="de.rahn.mule.transformer.DumpTransformer"/>
+                    <property name="name" value="Outbound-EchoTestFlow"/>
+                    <property name="auxiliary;index" value="22"/>
                 </properties>
             </pattern>
             <scope name="Rollback Exception Strategy" type="http://www.mulesoft.org/schema/mule/core/rollback-exception-strategy" entity-id="Rollback Exception Strategy#1">
@@ -310,26 +291,23 @@
                 <compartment entity-id="compartment#2">
                     <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#4">
                         <scope name="Default" type="http://www.mulesoft.org/schema/mule/core/!" entity-id="Default#1">
-                            <graphicalData x="0" y="0" width="0" height="0"/>
                             <compartment entity-id="compartment#3">
 <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#5">
     <pattern name="Fault Dumper" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#10">
-        <graphicalData x="0" y="0" width="0" height="0"/>
         <properties>
             <property name="returnClass"/>
             <property name="ignoreBadInput"/>
-            <property name="name" value="Fault-EchoTestFlow"/>
             <property name="encoding"/>
-            <property name="class" value="de.rahn.mule.transformer.DumpTransformer"/>
-            <property name="auxiliary;index" value="24"/>
             <property name="mimeType"/>
+            <property name="class" value="de.rahn.mule.transformer.DumpTransformer"/>
+            <property name="name" value="Fault-EchoTestFlow"/>
+            <property name="auxiliary;index" value="24"/>
         </properties>
     </pattern>
 </lane>
                             </compartment>
                         </scope>
                         <scope name="Redelivery exhausted" type="http://www.mulesoft.org/schema/mule/core/on-redelivery-attempts-exceeded" entity-id="Redelivery exhausted#1">
-                            <graphicalData x="0" y="0" width="0" height="0"/>
                             <compartment/>
                         </scope>
                     </lane>
