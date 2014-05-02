@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:cb="http://www.legsem.com/legstar/xml/cobol-binding-1.0.1.xsd" xmlns:tns="http://xmlns.frank-rahn.de/types/cixs/cbk010/output/1.0" elementFormDefault="qualified" targetNamespace="http://xmlns.frank-rahn.de/types/cixs/cbk010/output/1.0">
+    <complexType name="Dfhcommarea">
+        <sequence>
+            <element name="result" type="tns:Result">
+                <annotation>
+                    <appinfo>
+                        <cb:cobolElement cobolName="RESULT" levelNumber="5" srceLine="2" type="GROUP_ITEM"/>
+                    </appinfo>
+                </annotation>
+            </element>
+            <element name="ausgabe" type="tns:Ausgabe">
+                <annotation>
+                    <appinfo>
+                        <cb:cobolElement cobolName="AUSGABE" levelNumber="5" srceLine="6" type="GROUP_ITEM"/>
+                    </appinfo>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="Result">
+        <sequence>
+            <element name="fehlercode">
+                <annotation>
+                    <appinfo>
+                        <cb:cobolElement cobolName="FEHLERCODE" levelNumber="10" picture="X(02)" srceLine="3" type="ALPHANUMERIC_ITEM"/>
+                    </appinfo>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="2"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="fehlertext">
+                <annotation>
+                    <appinfo>
+                        <cb:cobolElement cobolName="FEHLERTEXT" levelNumber="10" picture="X(72)" srceLine="4" type="ALPHANUMERIC_ITEM"/>
+                    </appinfo>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="72"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="sqlcode">
+                <annotation>
+                    <appinfo>
+                        <cb:cobolElement cobolName="SQLCODE" levelNumber="10" picture="S9(5)" signed="true" srceLine="5" totalDigits="5" type="BINARY_ITEM" usage="BINARY"/>
+                    </appinfo>
+                </annotation>
+                <simpleType>
+                    <restriction base="int">
+                        <totalDigits value="5"/>
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="Ausgabe">
+        <sequence>
+            <element maxOccurs="15" minOccurs="15" name="bank" type="tns:Bank">
+                <annotation>
+                    <appinfo>
+                        <cb:cobolElement cobolName="BANK" levelNumber="7" maxOccurs="15" minOccurs="15" srceLine="7" type="GROUP_ITEM"/>
+                    </appinfo>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="Bank">
+        <sequence>
+            <element name="name">
+                <annotation>
+                    <appinfo>
+                        <cb:cobolElement cobolName="NAME" levelNumber="10" picture="X(30)" srceLine="8" type="ALPHANUMERIC_ITEM"/>
+                    </appinfo>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="30"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="blz">
+                <annotation>
+                    <appinfo>
+                        <cb:cobolElement cobolName="BLZ" levelNumber="10" picture="X(08)" srceLine="9" type="ALPHANUMERIC_ITEM"/>
+                    </appinfo>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="8"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="plz">
+                <annotation>
+                    <appinfo>
+                        <cb:cobolElement cobolName="PLZ" levelNumber="10" picture="X(05)" srceLine="10" type="ALPHANUMERIC_ITEM"/>
+                    </appinfo>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="5"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="ort">
+                <annotation>
+                    <appinfo>
+                        <cb:cobolElement cobolName="ORT" levelNumber="10" picture="X(30)" srceLine="11" type="ALPHANUMERIC_ITEM"/>
+                    </appinfo>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="30"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="bic">
+                <annotation>
+                    <appinfo>
+                        <cb:cobolElement cobolName="BIC" levelNumber="10" picture="X(11)" srceLine="12" type="ALPHANUMERIC_ITEM"/>
+                    </appinfo>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="11"/>
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+    </complexType>
+    <element name="dfhcommarea" type="tns:Dfhcommarea">
+        <annotation>
+            <appinfo>
+                <cb:cobolElement cobolName="DFHCOMMAREA" levelNumber="1" srceLine="1" type="GROUP_ITEM"/>
+            </appinfo>
+        </annotation>
+    </element>
+</schema>

@@ -1,0 +1,17 @@
+coxbBinDir=/home/frank/git/mule/cobol-cics-legstar-mule-esb/target/classes
+coxbPackageName=de.frank_rahn.xmlns.types.cixs.cbk010.output._1.bind
+coxbSrcDir=/home/frank/git/mule/cobol-cics-legstar-mule-esb/src/main/java
+eciCompatible=false
+eclipse.preferences.version=1
+generateIsSetMethod=true
+internalBindings=true
+isCompileTransformers=false
+isJsonTransformers=false
+isXmlTransformers=true
+jaxbBinDir=/home/frank/git/mule/cobol-cics-legstar-mule-esb/target/classes
+jaxbPackageName=de.frank_rahn.xmlns.types.cixs.cbk010.output._1
+jaxbRootClassNames_0=Dfhcommarea
+jaxbSrcDir=/home/frank/git/mule/cobol-cics-legstar-mule-esb/src/main/java
+noPackageInfo=false
+serializableID=1
+xsdFile=/home/frank/git/mule/cobol-cics-legstar-mule-esb/cbk010o.xsd

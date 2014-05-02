@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:cb="http://www.legsem.com/legstar/xml/cobol-binding-1.0.1.xsd" xmlns:tns="http://xmlns.frank-rahn.de/types/cixs/cbk010/input/1.0" elementFormDefault="qualified" targetNamespace="http://xmlns.frank-rahn.de/types/cixs/cbk010/input/1.0">
+    <complexType name="Dfhcommarea">
+        <sequence>
+            <element name="system" type="tns:System">
+                <annotation>
+                    <appinfo>
+                        <cb:cobolElement cobolName="SYSTEM" levelNumber="5" srceLine="2" type="GROUP_ITEM"/>
+                    </appinfo>
+                </annotation>
+            </element>
+            <element name="eingabe" type="tns:Eingabe">
+                <annotation>
+                    <appinfo>
+                        <cb:cobolElement cobolName="EINGABE" levelNumber="5" srceLine="4" type="GROUP_ITEM"/>
+                    </appinfo>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="System">
+        <sequence>
+            <element name="prog">
+                <annotation>
+                    <appinfo>
+                        <cb:cobolElement cobolName="PROG" levelNumber="10" picture="X(08)" srceLine="3" type="ALPHANUMERIC_ITEM"/>
+                    </appinfo>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="8"/>
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="Eingabe">
+        <sequence>
+            <element name="bank" type="tns:Bank">
+                <annotation>
+                    <appinfo>
+                        <cb:cobolElement cobolName="BANK" levelNumber="7" srceLine="5" type="GROUP_ITEM"/>
+                    </appinfo>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="Bank">
+        <sequence>
+            <element name="name">
+                <annotation>
+                    <appinfo>
+                        <cb:cobolElement cobolName="NAME" levelNumber="10" picture="X(30)" srceLine="6" type="ALPHANUMERIC_ITEM"/>
+                    </appinfo>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="30"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="blz">
+                <annotation>
+                    <appinfo>
+                        <cb:cobolElement cobolName="BLZ" levelNumber="10" picture="X(08)" srceLine="7" type="ALPHANUMERIC_ITEM"/>
+                    </appinfo>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="8"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="ort">
+                <annotation>
+                    <appinfo>
+                        <cb:cobolElement cobolName="ORT" levelNumber="10" picture="X(30)" srceLine="8" type="ALPHANUMERIC_ITEM"/>
+                    </appinfo>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="30"/>
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+    </complexType>
+    <element name="dfhcommarea" type="tns:Dfhcommarea">
+        <annotation>
+            <appinfo>
+                <cb:cobolElement cobolName="DFHCOMMAREA" levelNumber="1" srceLine="1" type="GROUP_ITEM"/>
+            </appinfo>
+        </annotation>
+    </element>
+</schema>

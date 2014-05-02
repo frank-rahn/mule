@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This Mule configuration implements an adapter service for a mainframe program.
+      Clients of this Mule service are expected to send serialized java objects over HTTP.
+      Transport from Mule service to mainframe is LEGSTAR-HTTP.
+ -->
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:http="http://www.mulesoft.org/schema/mule/http"
+        xmlns:legstar="http://www.mulesoft.org/schema/mule/legstar"
+    xsi:schemaLocation=
+        "http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.4/mule.xsd
+         http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.4/mule-http.xsd
+         http://www.mulesoft.org/schema/mule/legstar http://www.legsem.com/legstar/xml/mule-legstar-3.4.xsd
+        ">
+
+    <description>Mule configuration for bk010 adapter service</description>
+
+
+    <!-- Transform serialized java objects to mainframe data -->
+    <legstar:java-to-host-transformer name="pbk010JavaToHost"
+        hostCharset="IBM01141"
+        class="de.rahn.legstar.cixs.bk010.DfhcommareaToHostMuleTransformer" />
+
+    <!-- Transform mainframe data to serialized java objects -->
+    <legstar:host-to-java-transformer name="pbk010HostToJava"
+        hostCharset="IBM01141"
+        class="de.rahn.legstar.cixs.bk010.HostToDfhcommareaMuleTransformer" />
+
+    <!-- Wrap mainframe data in a LegStar request for mainframe program execution -->
+    <legstar:host-to-legstar-transformer name="pbk010HostToLegStar"
+        hostCharset="IBM01141"
+    >
+        <legstar:host-program
+            programName="PBK010"
+            maxDataLength="1338"
+            dataLength="76"
+        >
+        </legstar:host-program>
+    </legstar:host-to-legstar-transformer>
+    
+    <!-- Unwrap LegStar response to mainframe program execution -->
+    <legstar:legstar-to-host-transformer name="pbk010LegStarToHost"/>
+
+    <http:endpoint name="pbk010ClientEndpoint" exchange-pattern="request-response"
+        address="http://localhost:3280/pbk010" >
+        <byte-array-to-object-transformer/>
+    </http:endpoint>
+
+    <legstar:endpoint name="mainframeRequestEndpoint" exchange-pattern="request-response"
+        address="legstar://mainframe.frank-rahn.de:4081/CICS/BK01/LSWEBBIN" />
+
+    <flow name="pbk010Adapter">
+        <inbound-endpoint ref="pbk010ClientEndpoint" />
+        <outbound-endpoint ref="mainframeRequestEndpoint"
+            transformer-refs="pbk010JavaToHost pbk010HostToLegStar"
+            responseTransformer-refs="pbk010LegStarToHost pbk010HostToJava" />
+    </flow>
+</mule>

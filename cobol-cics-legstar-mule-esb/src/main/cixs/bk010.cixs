@@ -1,0 +1,6 @@
+<cixsMapping name="bk010">
+<cixsOperation name="pbk010" cicsProgramName="PBK010" faultType="Pbk010Fault" faultInfoType="Pbk010FaultInfo" requestHolderType="Dfhcommarea" requestWrapperType="Pbk010Request" responseHolderType="Dfhcommarea" responseWrapperType="Pbk010Response">
+<input jaxbType="Dfhcommarea" jaxbPackageName="de.frank_rahn.xmlns.types.cixs.cbk010.input._1" coxbType="DfhcommareaBinding" coxbPackageName="de.frank_rahn.xmlns.types.cixs.cbk010.input._1.bind" cobolRootDataItemName="Dfhcommarea" jaxbPropertyName="Dfhcommarea" jaxbFieldName="dfhcommarea"/>
+<output jaxbType="Dfhcommarea" jaxbPackageName="de.frank_rahn.xmlns.types.cixs.cbk010.output._1" coxbType="DfhcommareaBinding" coxbPackageName="de.frank_rahn.xmlns.types.cixs.cbk010.output._1.bind" cobolRootDataItemName="Dfhcommarea" jaxbPropertyName="Dfhcommarea" jaxbFieldName="dfhcommarea"/>
+</cixsOperation>
+</cixsMapping>

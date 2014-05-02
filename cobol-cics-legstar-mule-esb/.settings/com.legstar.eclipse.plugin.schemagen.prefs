@@ -1,0 +1,4 @@
+com.legstar.eclipse.plugin.schemagen.cobolCode=\        01 DFHCOMMAREA.\n          05 RESULT.\n              10 FEHLERCODE          PIC X(02).\n              10 FEHLERTEXT          PIC X(72).\n              10 SQLCODE             PIC S9(5) BINARY.\n          05 AUSGABE.\n            07 BANK                  OCCURS 15.\n              10 NAME                PIC X(30).\n              10 BLZ                 PIC X(08).\n              10 PLZ                 PIC X(05).\n              10 ORT                 PIC X(30).\n              10 BIC                 PIC X(11).\n              \n
+eclipse.preferences.version=1
+targetNamespace=http\://xmlns.frank-rahn.de/types/cixs/cbk010/output/1.0
+targetXsdFileName=cbk010o.xsd
