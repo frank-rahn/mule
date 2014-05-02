@@ -34,9 +34,13 @@ http://www.mulesoft.org/schema/mule/legstar http://www.legsem.com/legstar/xml/mu
         <http:inbound-endpoint host="localhost" port="8080" path="pbk0101" exchange-pattern="request-response" doc:name="Inbound HTTP Endpoint" />
         <cxf:jaxws-service serviceClass="de.frank_rahn.xmlns.ws.bic._1_0.BicService" doc:name="Inbound SOAP Service" />
         
+        <custom-transformer class="de.rahn.legstar.cixs.bk010.WebserviceToPBK010JavaTransformer" doc:name="Request -&gt; CBK010I"/>
+        
         <outbound-endpoint ref="mainframeRequestEndpoint" exchange-pattern="request-response" doc:name="Outbound LegStar Endpoint"
             transformer-refs="pbk010JavaToHost pbk010HostToLegStar"
             responseTransformer-refs="pbk010LegStarToHost pbk010HostToJava" />
+            
+		<custom-transformer class="de.rahn.legstar.cixs.bk010.PBK010JavaToWebserviceTransformer" doc:name="CBK010O -&gt; Response"/>
     </flow>
     
 </mule>

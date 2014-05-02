@@ -17,7 +17,7 @@
     <global-unknown description="false" unknownName="mainframeRequestEndpoint" index="6" entity-id="global-unknown#5">
         <content>&lt;legstar:endpoint xmlns:legstar=&quot;http://www.mulesoft.org/schema/mule/legstar&quot; name=&quot;mainframeRequestEndpoint&quot; exchange-pattern=&quot;request-response&quot; address=&quot;legstar://TD00123:geheim@mainframe.frank-rahn.de:4081/CICS/BK01/LSWEBBIN&quot;/&gt;</content>
     </global-unknown>
-    <flow SubFlow="false" name="cobol-cics-legstar-mule-esbFlow" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="44344ebc-f5f8-4f56-a9a8-688a738b90d9">
+    <flow SubFlow="false" name="cobol-cics-legstar-mule-esbFlow" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="90f447eb-5c8b-4fc2-9e5c-68441145acd7">
         <properties>
             <property name="initialState"/>
             <property name="processingStrategy2"/>
@@ -77,6 +77,17 @@
                     <property name="auxiliary;index" value="9"/>
                 </properties>
             </pattern>
+            <pattern name="Request -&gt; CBK010I" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="class" value="de.rahn.legstar.cixs.bk010.WebserviceToPBK010JavaTransformer"/>
+                    <property name="auxiliary;index" value="10"/>
+                    <property name="mimeType"/>
+                </properties>
+            </pattern>
             <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Outbound LegStar Endpoint" type="http://www.mulesoft.org/schema/mule/core/endpoint" entity-id="Generic#1">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
@@ -89,12 +100,23 @@
                     <property name="address"/>
                     <property name="encoding"/>
                     <property name="responseTransformer-refs" value="pbk010LegStarToHost pbk010HostToJava"/>
-                    <property name="auxiliary;index" value="10"/>
+                    <property name="auxiliary;index" value="11"/>
                     <property name="responseTimeout"/>
                     <property name="mimeType"/>
                     <property name="connector-ref"/>
                 </properties>
             </endpoint>
+            <pattern name="CBK010O -&gt; Response" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#2">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="class" value="de.rahn.legstar.cixs.bk010.PBK010JavaToWebserviceTransformer"/>
+                    <property name="auxiliary;index" value="12"/>
+                    <property name="mimeType"/>
+                </properties>
+            </pattern>
         </lane>
     </flow>
 </mule-configuration>
