@@ -14,17 +14,14 @@
     <global-unknown description="false" unknownName="pbk010LegStarToHost" index="5" entity-id="global-unknown#4">
         <content>&lt;legstar:legstar-to-host-transformer xmlns:legstar=&quot;http://www.mulesoft.org/schema/mule/legstar&quot; name=&quot;pbk010LegStarToHost&quot;/&gt;</content>
     </global-unknown>
-    <global-unknown description="false" unknownName="mainframeRequestEndpoint" index="6" entity-id="global-unknown#5">
-        <content>&lt;legstar:endpoint xmlns:legstar=&quot;http://www.mulesoft.org/schema/mule/legstar&quot; name=&quot;mainframeRequestEndpoint&quot; exchange-pattern=&quot;request-response&quot; address=&quot;legstar://TD00123:geheim@mainframe.frank-rahn.de:4081/CICS/BK01/LSWEBBIN&quot;/&gt;</content>
-    </global-unknown>
-    <flow SubFlow="false" name="cobol-cics-legstar-mule-esbFlow" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="90f447eb-5c8b-4fc2-9e5c-68441145acd7">
+    <flow SubFlow="false" name="cobol-cics-legstar-mule-esbFlow" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="641be536-73ef-41f3-9915-1a06e938d364">
         <properties>
             <property name="initialState"/>
             <property name="processingStrategy2"/>
             <property name="processingStrategy"/>
             <property name="bussinessEventsLabel"/>
             <property name="tracking:enable-default-events" value="true"/>
-            <property name="auxiliary;index" value="7"/>
+            <property name="auxiliary;index" value="6"/>
         </properties>
         <description>Bereitstellen eines Integrationsservices für das Mainframe CICS Programms PBK010.</description>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
@@ -52,7 +49,7 @@
                     <property name="responseTransformer-refs"/>
                     <property name="method"/>
                     <property name="user"/>
-                    <property name="auxiliary;index" value="8"/>
+                    <property name="auxiliary;index" value="7"/>
                     <property name="responseTimeout"/>
                     <property name="mimeType"/>
                     <property name="connector-ref"/>
@@ -74,7 +71,7 @@
                     <property name="mtomEnabled"/>
                     <property name="soapVersion"/>
                     <property name="enableMuleSoapHeaders"/>
-                    <property name="auxiliary;index" value="9"/>
+                    <property name="auxiliary;index" value="8"/>
                 </properties>
             </pattern>
             <pattern name="Request -&gt; CBK010I" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#1">
@@ -84,25 +81,36 @@
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
                     <property name="class" value="de.rahn.legstar.cixs.bk010.WebserviceToPBK010JavaTransformer"/>
-                    <property name="auxiliary;index" value="10"/>
+                    <property name="auxiliary;index" value="9"/>
                     <property name="mimeType"/>
                 </properties>
             </pattern>
-            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Outbound LegStar Endpoint" type="http://www.mulesoft.org/schema/mule/core/endpoint" entity-id="Generic#1">
+            <endpoint direction="Outbound" message-exchange-pattern="RequestResponse" name="Outbound LegStar Endpoint" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#2">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
+                    <property name="port" value="4081"/>
+                    <property name="host" value="mainframe.frank-rahn.de"/>
                     <property name="businessEventsLabel"/>
+                    <property name="followRedirects"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="keep-alive"/>
+                    <property name="contentType"/>
                     <property name="disableTransportTransformer"/>
+                    <property name="password" value="geheim"/>
                     <property name="exchange-pattern" value="request-response"/>
                     <property name="tracking:enable-default-events"/>
-                    <property name="ref" value="mainframeRequestEndpoint"/>
+                    <property name="ref"/>
                     <property name="transformer-refs" value="pbk010JavaToHost pbk010HostToLegStar"/>
+                    <property name="httpLabel"/>
                     <property name="address"/>
+                    <property name="path" value="CICS/BK01/LSWEBBIN"/>
                     <property name="encoding"/>
                     <property name="responseTransformer-refs" value="pbk010LegStarToHost pbk010HostToJava"/>
-                    <property name="auxiliary;index" value="11"/>
+                    <property name="method"/>
+                    <property name="user" value="TD00123"/>
+                    <property name="auxiliary;index" value="10"/>
                     <property name="responseTimeout"/>
-                    <property name="mimeType"/>
+                    <property name="mimeType" value="application/octet-stream"/>
                     <property name="connector-ref"/>
                 </properties>
             </endpoint>
@@ -113,7 +121,7 @@
                     <property name="ignoreBadInput"/>
                     <property name="encoding"/>
                     <property name="class" value="de.rahn.legstar.cixs.bk010.PBK010JavaToWebserviceTransformer"/>
-                    <property name="auxiliary;index" value="12"/>
+                    <property name="auxiliary;index" value="11"/>
                     <property name="mimeType"/>
                 </properties>
             </pattern>
