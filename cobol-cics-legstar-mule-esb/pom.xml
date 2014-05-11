@@ -51,5 +51,31 @@
 			<artifactId>legstar-mule-generator</artifactId>
 		</dependency>
 	</dependencies>
-	
+
+	<build>
+		<plugins>	
+			<plugin>
+				<groupId>org.mule.tools</groupId>
+				<artifactId>maven-mule-plugin</artifactId>
+				<configuration>
+					<!--
+						Alterntiv können die LegStar-Komponenten im Mule Server
+						installiert werden. So werden diese Bibliotheken und die
+						abhängigen Bibliotheken in der Mule-anwendung platziert.
+					-->
+					<inclusions>
+						<inclusion>
+							<groupId>org.mule.transports</groupId>
+							<artifactId>legstar-mule-transport</artifactId>
+						</inclusion>
+						<inclusion>
+							<groupId>org.mule.transports</groupId>
+							<artifactId>legstar-mule-generator</artifactId>
+						</inclusion>
+					</inclusions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

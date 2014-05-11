@@ -385,6 +385,7 @@
 					<copyToAppsDirectory>true</copyToAppsDirectory>
 					<excludes>
 						<exclude>log4j.properties</exclude>
+						<exclude>.gitignore</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
