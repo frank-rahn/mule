@@ -1,272 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.rahn.legstar.cixs.bk010</groupId>
+
+	<parent>
+		<groupId>de.rahn.mule</groupId>
+		<artifactId>mule-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<groupId>de.rahn.mule.legstar.cixs.bk010</groupId>
 	<artifactId>cobol-cics-legstar-mule-esb</artifactId>
-	<packaging>mule</packaging>
 	<version>1.0.0-SNAPSHOT</version>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-		<mule.version>3.4.0</mule.version>
-		<legstar.version>3.4.0</legstar.version>
-		<jdk.version>1.7</jdk.version>
-	</properties>
-
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-install-plugin</artifactId>
-					<version>2.5.1</version>
-				</plugin>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.mule.tools</groupId>
-										<artifactId>maven-mule-plugin</artifactId>
-										<versionRange>[1.9,)</versionRange>
-										<goals>
-											<goal>attach-test-resources</goal>
-											<goal>filter-resources</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore/>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-
-		<plugins>
-			<plugin>
-				<groupId>org.mule.tools</groupId>
-				<artifactId>maven-mule-plugin</artifactId>
-				<version>1.9</version>
-				<extensions>true</extensions>
-				<configuration>
-					<copyToAppsDirectory>true</copyToAppsDirectory>
-					<inclusions>
-						<inclusion>
-							<groupId>org.mule.transports</groupId>
-							<artifactId>legstar-mule-transport</artifactId>
-						</inclusion>
-						<inclusion>
-							<groupId>org.mule.transports</groupId>
-							<artifactId>legstar-mule-generator</artifactId>
-						</inclusion>
-					</inclusions>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>2.9</version>
-				<configuration>
-					<downloadSources>true</downloadSources>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.8</version>
-				<executions>
-					<execution>
-						<id>add-resource</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>add-resource</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<resources>
-						<resource>
-							<directory>src/main/app/</directory>
-						</resource>
-					</resources>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+	<packaging>mule</packaging>
 
 	<dependencies>
-		<!-- Mule Dependencies -->
+		<dependency>
+			<groupId>de.rahn.mule.legstar.cixs.bk010</groupId>
+			<artifactId>cobol-cics-legstar-mule-esb-jaxb</artifactId>
+		</dependency>
+		
+		<!-- Mule -->
 		<dependency>
 			<groupId>org.mule</groupId>
 			<artifactId>mule-core</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
 		</dependency>
-
-		<!-- Xml configuration -->
 		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-module-spring-config</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- Mule Transports -->
-		<dependency>
-			<groupId>org.mule.transports</groupId>
-			<artifactId>mule-transport-file</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.transports</groupId>
-			<artifactId>mule-transport-http</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.transports</groupId>
-			<artifactId>mule-transport-jdbc</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.transports</groupId>
-			<artifactId>mule-transport-jms</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.transports</groupId>
-			<artifactId>mule-transport-vm</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		
-		<!-- Mule Modules -->
-		<dependency>
-			<groupId>org.mule.modules</groupId>
-			<artifactId>mule-module-client</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-module-cxf</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.mule.modules</groupId>
-			<artifactId>mule-module-management</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.modules</groupId>
-			<artifactId>mule-module-scripting</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.modules</groupId>
-			<artifactId>mule-module-sxc</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.modules</groupId>
-			<artifactId>mule-module-xml</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
+			<groupId>org.mule.transports</groupId>
+			<artifactId>mule-transport-http</artifactId>
 		</dependency>
 		
-		<!-- Testing -->
-		<dependency>
-			<groupId>org.mule.tests</groupId>
-			<artifactId>mule-tests-functional</artifactId>
-			<version>${mule.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>mockobjects</groupId>
-			<artifactId>mockobjects-core</artifactId>
-			<version>0.09</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
-		</dependency>
-
 		<!-- LegStar -->
 		<dependency>
 			<groupId>org.mule.transports</groupId>
 			<artifactId>legstar-mule-transport</artifactId>
-			<version>${legstar.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mule.transports</groupId>
 			<artifactId>legstar-mule-generator</artifactId>
-			<version>${legstar.version}</version>
 		</dependency>
 	</dependencies>
-	
-	<repositories>
-		<repository>
-			<id>Central</id>
-			<name>Central</name>
-			<url>http://repo1.maven.org/maven2/</url>
-			<layout>default</layout>
-		</repository>
-		<repository>
-			<id>LegStar</id>
-			<name>LegStar</name>
-			<url>http://www.legsem.com/legstar/maven/repo/</url>
-			<layout>default</layout>
-		</repository>
-		<repository>
-			<id>mulesoft-releases</id>
-			<name>MuleSoft Releases Repository</name>
-			<url>http://repository.mulesoft.org/releases/</url>
-			<layout>default</layout>
-		</repository>
-	</repositories>
-	
-	<pluginRepositories>
-		<pluginRepository>
-			<id>mulesoft-release</id>
-			<name>mulesoft release repository</name>
-			<layout>default</layout>
-			<url>http://repository.mulesoft.org/releases/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
 	
 </project>

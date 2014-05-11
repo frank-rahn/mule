@@ -1,6 +1,5 @@
 package de.rahn.legstar.cixs.bk010;
 
-import static de.frank_rahn.xmlns.types.ErrorUtils.ERROR_FACTORY;
 import static de.frank_rahn.xmlns.types.error._1.ErrorCategory.ERROR;
 import static java.lang.Long.valueOf;
 import static org.apache.commons.lang.StringUtils.isNotEmpty;
@@ -17,6 +16,7 @@ import de.frank_rahn.xmlns.services.bic._1.ObjectFactory;
 import de.frank_rahn.xmlns.types.cixs.cbk010.output._1.Bank;
 import de.frank_rahn.xmlns.types.cixs.cbk010.output._1.Dfhcommarea;
 import de.frank_rahn.xmlns.types.cixs.cbk010.output._1.Result;
+import de.frank_rahn.xmlns.types.error.ErrorUtils;
 import de.frank_rahn.xmlns.types.error._1.ErrorFault;
 
 /**
@@ -70,11 +70,11 @@ public class WebserviceToPBK010JavaTransformer extends AbstractTransformer {
 	}
 
 	private ErrorFault createErrorFault(Result result) {
-		return ERROR_FACTORY
+		return ErrorUtils
 				.createErrorFault()
 				.withId(valueOf(result.getFehlercode()))
 				.withMessages(
-						ERROR_FACTORY.createErrorMessage()
+						ErrorUtils.createErrorMessage()
 								.withErrorCategory(ERROR)
 								.withErrorText(result.getFehlertext())
 								.withErrorNumber(result.getSqlcode()));

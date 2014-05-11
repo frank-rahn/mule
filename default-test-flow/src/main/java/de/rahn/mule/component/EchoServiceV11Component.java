@@ -1,8 +1,8 @@
 package de.rahn.mule.component;
 
+import static de.frank_rahn.xmlns.types.error.ErrorHelper.createErrorFault;
+import static de.frank_rahn.xmlns.types.error.ErrorHelper.createErrorMessage;
 import static de.frank_rahn.xmlns.types.error._1.ErrorCategory.ERROR;
-import static de.rahn.mule.component.ErrorHelper.createErrorFault;
-import static de.rahn.mule.component.ErrorHelper.createErrorMessage;
 import static java.util.Calendar.getInstance;
 import static java.util.Locale.GERMANY;
 

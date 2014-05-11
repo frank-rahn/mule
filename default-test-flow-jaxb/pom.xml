@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.rahn.mule</groupId>
+		<artifactId>mule-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<groupId>de.rahn.mule</groupId>
+	<artifactId>default-test-flow-jaxb</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>generate-sources</id>
+						<configuration>
+							<wsdlOptions>
+								<wsdlOption>
+									<wsdl>http://xmlns.frank-rahn.de/ws/echo/1.0</wsdl>
+								</wsdlOption>
+								<wsdlOption>
+									<wsdl>http://xmlns.frank-rahn.de/ws/echo/1.1</wsdl>
+								</wsdlOption>
+								<wsdlOption>
+									<wsdl>http://xmlns.frank-rahn.de/ws/echo/2.0</wsdl>
+								</wsdlOption>
+							</wsdlOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
