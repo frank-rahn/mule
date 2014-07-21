@@ -12,12 +12,15 @@
 
 	<context:annotation-config />
 
+	<bean id="resolver" class="de.rahn.mule.services.echo.ErrorFaultMessageResolver" />
+
 	<bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"
 		p:contextPaths="de.frank_rahn.xmlns.services.echo._1" />
 
    	<bean class="org.springframework.ws.client.core.WebServiceTemplate"
         p:defaultUri="http://localhost:8081/echo"
         p:marshaller-ref="marshaller"
-        p:unmarshaller-ref="marshaller" />
+        p:unmarshaller-ref="marshaller"
+        p:faultMessageResolver-ref="resolver" />
 
 </beans>

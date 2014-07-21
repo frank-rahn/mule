@@ -1,5 +1,6 @@
 package de.rahn.mule.services.echo;
 
+import static de.frank_rahn.xmlns.types.error._1.ErrorCategory.ERROR;
 import static java.util.Calendar.getInstance;
 import static java.util.Locale.GERMANY;
 import static org.hamcrest.CoreMatchers.is;
@@ -14,11 +15,12 @@ import org.mule.api.registry.RegistrationException;
 import org.mule.tck.junit4.FunctionalTestCase;
 import org.mule.tck.junit4.rule.SystemProperty;
 import org.springframework.ws.client.core.WebServiceTemplate;
-import org.springframework.ws.soap.client.SoapFaultClientException;
 
 import de.frank_rahn.xmlns.services.echo._2.EchoRequest;
 import de.frank_rahn.xmlns.services.echo._2.EchoResponse;
 import de.frank_rahn.xmlns.services.echo._2.ObjectFactory;
+import de.frank_rahn.xmlns.types.error._1.ErrorFault;
+import de.frank_rahn.xmlns.types.error._1.ErrorMessage;
 
 /**
  * Tests für den Flow: DefaultTestFlow
@@ -64,10 +66,9 @@ public class DefaultTestFlowDevTest extends FunctionalTestCase {
 
 			response = (EchoResponse) webServiceTemplate
 					.marshalSendAndReceive(request);
-		} catch (SoapFaultClientException e) {
+		} catch (ErrorFaultException e) {
 			fail("Die EchoFault darf nicht geworfen werden. msg="
-					+ e.getFaultStringOrReason() + ", error="
-					+ e.getSoapFault().getFaultDetail());
+					+ e.getMessage() + ", error=" + e.getFaultInfo());
 			return;
 		} catch (RegistrationException e) {
 			fail("WebServiceTemplate nicht gefunden: " + e);
@@ -94,27 +95,23 @@ public class DefaultTestFlowDevTest extends FunctionalTestCase {
 
 			webServiceTemplate.marshalSendAndReceive(request);
 			fail("Es sollte eine Exception geworfen werden");
-			// } catch (EchoFault fault) {
-			// assertThat(fault.getMessage(), is(FAULT_MSG));
-			//
-			// ErrorFault info = fault.getFaultInfo();
-			//
-			// assertThat(info, notNullValue());
-			// assertThat(info.getId(), is(4711L));
-			// assertThat(info.getMessages(), notNullValue());
-			// assertThat(info.getMessages().size(), is(1));
-			//
-			// ErrorMessage msg = info.getMessages().get(0);
-			// assertThat(msg, notNullValue());
-			// assertThat(msg.getErrorNumber(), is(1));
-			// assertThat(msg.getErrorCategory(), is(ERROR));
-			// assertThat(msg.getErrorText(), is(FAULTINFO_MSG));
-		} catch (SoapFaultClientException e) {
-			assertThat(e.getFaultStringOrReason(), is(FAULT_MSG));
-			return;
+		} catch (ErrorFaultException fault) {
+			assertThat(fault.getMessage(), is(FAULT_MSG));
+
+			ErrorFault info = fault.getFaultInfo();
+
+			assertThat(info, notNullValue());
+			assertThat(info.getId(), is(4711L));
+			assertThat(info.getMessages(), notNullValue());
+			assertThat(info.getMessages().size(), is(1));
+
+			ErrorMessage msg = info.getMessages().get(0);
+			assertThat(msg, notNullValue());
+			assertThat(msg.getErrorNumber(), is(1));
+			assertThat(msg.getErrorCategory(), is(ERROR));
+			assertThat(msg.getErrorText(), is(FAULTINFO_MSG));
 		} catch (RegistrationException e) {
 			fail("WebServiceTemplate nicht gefunden: " + e);
-			return;
 		}
 	}
 
