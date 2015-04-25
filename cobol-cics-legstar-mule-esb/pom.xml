@@ -71,6 +71,17 @@
 					</inclusions>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<classpathContainers>
+						<classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+						<classpathContainer>com.legstar.eclipse.mule.LIBRARY</classpathContainer>
+						<classpathContainer>com.legstar.eclipse.LIBRARY</classpathContainer>
+					</classpathContainers>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
