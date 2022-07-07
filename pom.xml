@@ -15,7 +15,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<mule.version>3.4.0</mule.version>
-		<spring.version>3.2.1.RELEASE</spring.version>
+		<spring.version>3.2.4.RELEASE</spring.version>
 		<legstar.version>3.4.0</legstar.version>
 		<jdk.version>1.7</jdk.version>
 
